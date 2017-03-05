@@ -42,7 +42,11 @@ body {
 		desc
 		count
 */
-
+.but{
+	margin-left: 1vw;
+	height: 1vw;
+	width: 1vw;
+}
 .p_name{
 	padding-top: .5vw;
 	font-weight: bold;
@@ -145,24 +149,28 @@ body {
 $i = 0;
 while ($i < 3 && $i < count($temp)){
 ?>
-<div class="flex-item">
-	<div class='p_name'>
-		<?php echo $temp[$i][name]; ?>
-	</div>
+	<div class="flex-item">
+		<div class='p_name'>
+			<?php echo $temp[$i][name]; ?>
+		</div>
 
-	<div class='p_cat'>
-		<?php echo $temp[$i][category]; ?>
-	</div>
+		<div class='p_cat'>
+			<?php echo $temp[$i][category]; ?>
+		</div>
 
-	<div class='p_desc'>
-		<?php echo $temp[$i][desc]; ?>
-	</div>
+		<div class='p_desc'>
+			<?php echo $temp[$i][desc]; ?>
+		</div>
 
-	<div class='p_price'>
-		<?php echo $temp[$i][price]; ?>
+		<div class='p_price'>
+			$<?php echo $temp[$i][price]; ?>
+		</div>
+		<div class='but'>
+			<form action="product.php" method="post">
+			<button name="product" type="hidden" value='<?php echo serialize($temp[$i]); ?>'>See more</button>
+		</div>
 	</div>
-	</div>
-	<?php $i++; }?>
+		<?php $i++; }?>
 </div>
 
 <!-- ANOTHER -->
@@ -185,9 +193,34 @@ while ($i < $i + 3 && $i < count($temp)){
 	</div>
 
 	<div class='p_price'>
-		<?php echo $temp[$i][price]; ?>
+		$<?php echo $temp[$i][price]; ?>
 	</div>
+	<div class='but'>
+		<form action="product.php" method="post">
+		<button name="product" type="hidden" value='<?php echo serialize($temp[$i]); ?>'>See more</button>
 	</div>
+</div>
+	<?php $i++; }?>
+</div>
+
+<!-- Another -->
+<div class='flex-container'>
+<?php
+while ($i < $i + 3 && $i < count($temp)){
+?>
+<div class="flex-item">
+	<div class='p_name'>
+		<?php echo $temp[$i][name]; ?>
+	</div>
+
+	<div class='p_cat'>
+		<?php echo $temp[$i][category]; ?>
+	</div>
+
+	<div class='p_desc'>
+		<?php echo $temp[$i][desc]; ?>
+	</div>
+</div>
 	<?php $i++; }?>
 </div>
 </body>
