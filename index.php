@@ -1,9 +1,37 @@
+<?php
+$temp = [];
+
+if (file_exists("./system/private/products"))
+{
+	$prods = unserialize(file_get_contents("./system/private/products"));
+}
+
+$a = 0;
+
+foreach ($_GET as $key => $value)
+{
+	foreach ($prods as $key1 => $value)
+	{
+		$a++;
+		if ($value[category] === $key)
+		{
+			array_push($temp, $value);
+		}
+	}
+}
+if ($a == 0)
+{
+	$temp = unserialize(file_get_contents("./system/private/products"));
+}
+?>
+
 <html>
 <head>
 <style>
 
 body {
-	background-image: url("file:///nfs/2016/r/rpassafa/phprush00/img/paper.jpg");
+	background-image: url("./img/paper.jpg");
+	background-color: #EFEFEF;
 }
 /*
 	product-
@@ -29,6 +57,7 @@ body {
 }
 .p_price{
 	padding-top: .5vw;
+	padding-right: .5vw;
 	text-align: bottom;
 	text-align: right;
 	font-size: 2vw;
@@ -43,7 +72,9 @@ body {
 .sidebar{
 	margin-top: 2vw;
 	border-radius: 25px;
-	background-color: green;
+	padding-top: 2vw;
+	padding-left: .5vw;
+	background-color: #06ABE2;
 	margin-left: 10vw;
 	opacity: 0.7;
 	width: 15vw;
@@ -57,7 +88,7 @@ body {
 	opacity: 0.7;
 	border-radius: 25px;
 	border-style: solid;
-	background-color: green;
+	background-color: #394156;
 	text-align: center;
 	font-size: 200%;
 	width: 95vw;
@@ -74,7 +105,7 @@ body {
 
 .flex-item {
 	border-radius: 25px;
-	background-color: green;
+	background-color: #06ABE2;
 	opacity: 0.7;
 	margin: 5px auto;
 	width: 25vw;
@@ -90,14 +121,27 @@ body {
 </div>
 
 <div class="sidebar">
+	<form action="index.php" method="get">
+	<?php
+	if (file_exists("./system/private/products"))
+	{
+		$cats = unserialize(file_get_contents("./system/private/categories"));
+	}
+	$i = 0;
+	while ($i < count($cats)){
+	?>
+		<input type="checkbox" name=<?php echo $cats[$i][name]?> value="OK"><?php echo $cats[$i][name]?><br>
+		<?php $i++;} ?>
+		<input type="submit" value="Submit">
+	</form>
 </div>
+
+
+
+
+
 <div class='flex-container'>
 <?php
-if (file_exists("./system/private/products"))
-{
-	$temp = unserialize(file_get_contents("./system/private/products"));
-	// print_r($temp);
-}
 $i = 0;
 while ($i < 3 && $i < count($temp)){
 ?>
@@ -125,11 +169,6 @@ while ($i < 3 && $i < count($temp)){
 
 <div class='flex-container'>
 <?php
-if (file_exists("./system/private/products"))
-{
-	$temp = unserialize(file_get_contents("./system/private/products"));
-	// print_r($temp);
-}
 while ($i < $i + 3 && $i < count($temp)){
 ?>
 <div class="flex-item">
