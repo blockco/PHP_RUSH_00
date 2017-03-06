@@ -1,4 +1,5 @@
 <?php
+session_start();
 $temp = [];
 
 if (file_exists("./system/private/products"))
@@ -27,102 +28,30 @@ if ($a == 0)
 
 <html>
 <head>
-<style>
-
-body {
-	background-image: url("./img/paper.jpg");
-	background-color: #EFEFEF;
-}
-/*
-	product-
-		name
-		cat
-		img
-		price
-		desc
-		count
-*/
-.but{
-	margin-left: 1vw;
-	height: 1vw;
-	width: 1vw;
-}
-.p_name{
-	padding-top: .5vw;
-	font-weight: bold;
-	text-align: center;
-	font-size: 2vw;
-}
-
-.p_cat{
-	padding-top: .5vw;
-	text-align: center;
-	font-size: 1.5vw;
-}
-.p_price{
-	padding-top: .5vw;
-	padding-right: .5vw;
-	text-align: bottom;
-	text-align: right;
-	font-size: 2vw;
-}
-
-.p_desc{
-	padding-top: .5vw;
-	text-align: center;
-	font-size: 1vw;
-}
-
-.sidebar{
-	margin-top: 2vw;
-	border-radius: 25px;
-	padding-top: 2vw;
-	padding-left: .5vw;
-	background-color: #06ABE2;
-	margin-left: 10vw;
-	opacity: 0.7;
-	width: 15vw;
-	height: 50vw;
-	float: left;
-	padding-bottom: 10vw;
-	border-style: solid;
-}
-
-.header{
-	opacity: 0.7;
-	border-radius: 25px;
-	border-style: solid;
-	background-color: #394156;
-	text-align: center;
-	font-size: 200%;
-	width: 95vw;
-	height: 5vw;
-}
-.flex-container {
-	margin: 0 auto;
-	align-items: center;
-	display: -webkit-flex;
-	display: flex;
-	width: 55vw;
-	height: 15vw;
-}
-
-.flex-item {
-	border-radius: 25px;
-	background-color: #06ABE2;
-	opacity: 0.7;
-	margin: 5px auto;
-	width: 25vw;
-	height: 13vw;
-	margin: 1vw;
-}
-</style>
+	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
 <div class="header">
-	this is the header
+	Online Store!
+	<div class="login">
+		<div class="p_login">
+			<?php if ($_SESSION[loggued_on_user] == "")
+			{
+				echo "<a href='./system/users/login.php'>login</a>";
+			}
+			else
+			{
+				echo "<a href='./system/users/logout.php'>logout</a>";
+			}
+			echo "
+			<a href='./cart/cart.php'>cart</a>";
+			?>
+		</div>
+	</div>
+	</div>
 </div>
+
 
 <div class="sidebar">
 	<form action="index.php" method="get">
@@ -177,7 +106,8 @@ while ($i < 3 && $i < count($temp)){
 
 <div class='flex-container'>
 <?php
-while ($i < $i + 3 && $i < count($temp)){
+$a = $i + 3;
+while ($i < $a && $i < count($temp)){
 ?>
 <div class="flex-item">
 	<div class='p_name'>
@@ -206,7 +136,8 @@ while ($i < $i + 3 && $i < count($temp)){
 <!-- Another -->
 <div class='flex-container'>
 <?php
-while ($i < $i + 3 && $i < count($temp)){
+$a = $i + 3;
+while ($i < $a && $i < count($temp)){
 ?>
 <div class="flex-item">
 	<div class='p_name'>

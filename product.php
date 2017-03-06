@@ -1,4 +1,5 @@
 <?php
+session_start();
 $product = unserialize($_POST[product]);
 ?>
 
@@ -74,6 +75,8 @@ body {
 			<div class="p_price">
 				$<?php echo $product[price]; ?>
 			</div>
+			<form action="./cart/addtocart.php" method="post">
+			<button name="product" type="hidden" value='<?php echo serialize($product); ?>'>Add To Cart</button>
 		</div>
 
 	</body>
